@@ -1,0 +1,178 @@
+a = input("Would you like to input new questions or start a game?\na - input questions\nb - start game\n")
+
+if a == "a":
+    file1=open("question and answer sheet","w")
+    
+    qestNum = int(input("How many questions would you like to input?\n"))
+    
+    file1.write(str(qestNum))
+    file1.write("\n")
+    file1.write("_____________________________________________________________\n")
+    
+    for i in range(qestNum):
+    
+        number = str(i+1)
+    
+        file1.write("\n")
+    
+        file1.write("\n")
+    
+        file1.write("\n")
+        file1.write("\n")
+        file1.write("\n")
+        file1.write("______________________________________________"+"\n")
+
+    print("______________________________________________________________________________________________________")
+    print("")
+    print('To input your questions and answers just go into the text file labelled "question and answer"')
+    print("")
+    print('Put the questions in the first line in the section')
+    print('Put the correct answer in the second line')
+    print('Put the incorrect answers in the last three lines of the section in any order')
+
+    file1.close()
+
+else:
+    
+    import random
+    
+    file1=open("question and answer sheet","r")
+    start=input("Press enter to start this game")
+    
+    content = file1.readlines()
+    qestNum = int(content[0])
+    qestLst = []
+    
+    hangman = 0
+    points = 0
+    
+    for i in range(qestNum):
+        qestLst.append(i+1)
+        
+    random.shuffle(qestLst)
+        
+    for i in range(qestNum):
+        qest = qestLst[i]
+        
+        print("____________________________________________________")
+        print(content[2+6*(qest-1)])
+        
+        ans1 = content[3+6*(qest-1)]
+        ans2 = content[4+6*(qest-1)]
+        ans3 = content[5+6*(qest-1)]
+        ans4 = content[6+6*(qest-1)]
+        
+        ansLst=[ans1,ans2,ans3,ans4]
+        
+        random.shuffle(ansLst)
+        
+        print(" A.",ansLst[0], "B.",ansLst[1], "C.",ansLst[2], "D.",ansLst[3])
+        answer = input("Your answer:\n")
+        
+        if answer == "A." or answer == "A" or answer == "a." or answer == "a":
+            if ansLst[0] == content[3+6*(qest-1)]:
+                print("correct answer, plus five points")
+                points = points + 5
+            else:
+                print("incorrect answer")
+                hangman = hangman + 1
+                
+        elif answer == "B." or answer == "B" or answer == "b." or answer == "b":
+            if ansLst[1] == content[3+6*(qest-1)]:
+                print("correct answer, plus five points")
+                points = points + 5
+            else:
+                print("incorrect answer")
+                hangman = hangman + 1
+                
+        elif answer == "C." or answer == "C" or answer == "C." or answer == "C":
+            if ansLst[2] == content[3+6*(qest-1)]:
+                print("correct answer, plus five points")
+                points = points + 5
+            else:
+                print("incorrect answer")
+                hangman = hangman + 1
+                
+        elif answer == "D." or answer == "D" or answer == "d." or answer == "d":
+            if ansLst[3] == content[3+6*(qest-1)]:
+                print("correct answer, plus five points")
+                points = points + 5
+            else:
+                print("incorrect answer")
+                hangman = hangman + 1
+                
+        else:
+            print("incorrect answer")
+            hangman = hangman + 1
+        
+        if hangman == 0:
+            print("  +---+")
+            print("  |   |")
+            print("      |")
+            print("      |")
+            print("      |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 1:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print("      |")
+            print("      |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 2:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print("  |   |")
+            print("      |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 3:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print(" /|   |")
+            print("      |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 4:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print(" /|\  |")
+            print("      |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 5:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print(" /|\  |")
+            print(" /    |")
+            print("      |")
+            print("=========")
+            
+        elif hangman == 6:
+            print("  +---+")
+            print("  |   |")
+            print("  O   |")
+            print(" /|\  |")
+            print(" / \  |")
+            print("      |")
+            print("=========")
+            
+            break
+        
+        
+    print("__________________________________________________________________________________________")
+    print("Game Over")
+    print("__________________________________________________________________________________________")
+    print("Final score is", points)
+    print("Start the program again to get a higher score")    
